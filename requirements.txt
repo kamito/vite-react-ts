@@ -1,0 +1,7 @@
+flask
+gunicorn
+requests
+whitenoise
+PyJWT
+python-dotenv
+google-cloud-logging
