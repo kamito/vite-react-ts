@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    {% if IS_DEBUG %}
+    <script type="module">
+     import RefreshRuntime from "http://localhost:3003/@react-refresh"
+     RefreshRuntime.injectIntoGlobalHook(window)
+     window.$RefreshReg$ = () => {}
+     window.$RefreshSig$ = () => (type) => type
+     window.__vite_plugin_react_preamble_installed__ = true
+     window.global = window
+    </script>
+    <script type="module" src="http://localhost:3003/@vite/client"></script>
+    <script type="module" src="http://localhost:3003/src/main.tsx"></script>
+    {% else %}
+    <script type="module" src="/src/main.tsx"></script>
+    {% endif %}
+  </body>
+</html>
