@@ -1,17 +1,31 @@
 .PHONY: install
-.PHONY: run-server
-.PHONY: dev-frontend watch-frontend build-frontend
+.PHONY: dev-server
+.PHONY: dev-frontend build-frontend
+.PHONY: build-docker run-docker
+.PHONY: build run
 
 install:
 	cd frontend && yarn install
 	pip install -r requirements.txt
 
-run-server:
-	FLASK_ENV=development python main.py
-
 dev-frontend:
 	cd frontend && yarn run dev
 
-watch-frontend:
-	cd frontend && yarn run watch
+build-frontend:
+	cd frontend && yarn run build
 
+dev-server:
+	FLASK_ENV=development python main.py
+
+run-server:
+	gunicorn --bind=:8080 --workers=1 --threads=4 --timeout=0 main:app
+
+build-docker:
+	echo "TODO: build-docker"
+
+run-docker:
+	echo "TODO: run-docker"
+
+build: build-docker
+
+run: build-frontend run-server
