@@ -3,6 +3,11 @@
 .PHONY: dev-frontend build-frontend
 .PHONY: build-docker run-docker
 .PHONY: build run
+.PHONY: version
+
+VERSION = $(shell cat ./VERSION | sed 's/ //g')
+GCP_PROJECT := blocks-gn-kamito
+DOCKER_URL := gcr.io/$(GCP_PROJECT)/appname
 
 install:
 	cd frontend && yarn install
@@ -21,11 +26,14 @@ run-server:
 	gunicorn --bind=:8080 --workers=1 --threads=4 --timeout=0 main:app
 
 build-docker:
-	echo "TODO: build-docker"
+	docker build -t $(DOCKER_URL):$(VERSION) .
 
 run-docker:
-	echo "TODO: run-docker"
+	docker run -t -i -p 8080:8080 --env-file ./.env --env IS_LOCAL=true $(DOCKER_URL):$(VERSION)
 
 build: build-docker
 
-run: build-frontend run-server
+run: run-server
+
+version:
+	@echo $(VERSION)
