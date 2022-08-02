@@ -27,7 +27,7 @@ class Blocks:
         del_data_keys = ['token', 'expires']
         for k in del_data_keys:
             del data[k]
-        return urlsafe_b64encode(json.dumps(data).encode())
+        return data
 
     def api_login(self, email=None, password=None):
         pass
