@@ -21,7 +21,7 @@ def blocks_login(fn):
         else:
             redirect_to = urlparse(request.host_url)
             redirect_to = redirect_to._replace(path="/__loggined")
-            rurl = blocks.redirect_login(
+            rurl = blocks.redirect_login_url(
                 url=const.get('BLOCKS_URL'),
                 redirect_to=redirect_to.geturl())
             return redirect(rurl)
@@ -31,6 +31,6 @@ def blocks_login(fn):
 @app.route("/__loggined")
 def loggined():
     data = request.args.get('data')
-    data = blocks.parse_response_data(data)
+    data = blocks.parse_data(data)
     session[BLOCKS_SESSTION_DATA_KEY] = data
     return redirect("/")
