@@ -24,7 +24,7 @@ class Blocks:
     def api_login(self, email=None, password=None):
         pass
 
-    def redirect_login(self, url=None, redirect_to=None):
+    def redirect_login_url(self, url=None, redirect_to=None):
         if url is None or url == "":
             raise UrlInvalidError()
 
@@ -47,7 +47,7 @@ class Blocks:
         auth = urlsafe_b64encode(base_str.encode())
         return "Bearer {}".format(auth.decode())
 
-    def parse_response_data(self, data=None, verify=True):
+    def parse_data(self, data=None, verify=True):
         if data is None or data == "":
             return None
 
