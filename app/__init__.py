@@ -7,8 +7,7 @@ from .blocks import blocks, blocks_login
 @app.route("/")
 @blocks_login
 def top():
-    data = blocks.login_data
     return render_template(
         "top.html",
-        b64_data_json=urlsafe_b64encode(json.dumps(data).encode())
+        b64_data_json=blocks.get_data_for_view()
         )
