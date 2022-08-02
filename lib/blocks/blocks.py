@@ -18,8 +18,16 @@ class Blocks:
     def set_login_data(self, data=None):
         self.login_data = data
 
-    def version(self):
-        return VERSION
+    def get_data_for_view(self):
+        data = self.login_data
+        if data is None:
+            return None
+
+        data = data.copy()
+        del_data_keys = ['token', 'expires']
+        for k in del_data_keys:
+            del data[k]
+        return urlsafe_b64encode(json.dumps(data).encode())
 
     def api_login(self, email=None, password=None):
         pass
@@ -56,3 +64,6 @@ class Blocks:
             payload, self.secret, algorithms=["HS256"],
             options={"verify_signature": verify})
         return data
+
+    def version(self):
+        return VERSION
