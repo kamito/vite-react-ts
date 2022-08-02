@@ -10,6 +10,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <script type="text/javascript">window.$INIT="{{b64_data_json.decode()|safe}}"</script>
     {% if IS_DEBUG %}
     <script type="module">
      import RefreshRuntime from "http://localhost:3003/@react-refresh"
