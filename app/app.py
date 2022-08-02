@@ -27,5 +27,5 @@ app.wsgi_app = WhiteNoise(
     autorefresh=IS_DEBUG
     )
 
-const_o = Const(is_debug=IS_DEBUG)
-app.jinja_env.globals.update(const_o.__dict__)
+const = Const(is_debug=IS_DEBUG)
+app.jinja_env.globals.update(const.__dict__)
