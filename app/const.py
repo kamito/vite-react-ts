@@ -21,6 +21,16 @@ class Const(object):
         self.STYLESHEETS = []
         self.load_manifest()
 
+
+    def get(self, key, defvar=None):
+        v = self.__dict__.get(key, defvar)
+        if v:
+            return v
+        else:
+            v = os.getenv(key, defvar)
+            self.__dict__[key] = v
+            return v
+
     def load_manifest(self):
         if not self.IS_DEBUG:
             manifest = None
